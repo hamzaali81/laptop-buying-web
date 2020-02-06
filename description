@@ -1,0 +1,15 @@
+ Node in cmd
+
+node=========>Enter
+1+1
+console.log("Hello world")
+ctrl+c=========>exit
+used in editor
+1.  console.log("Hello world")
+    node test.js          terminal
+
+
+npm install nodemon -g
+nodemon ==============enter
+
+json file in parse js object
