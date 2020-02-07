@@ -41,13 +41,28 @@ const id=url.parse(req.url,true).query.id;
 
 if(pathName==='/products' || pathName==='/')
 {
-    res.writeHead(200,{
-     'Content-type':'text/html',
-})
+    res.writeHead(200,{'Content-type':'text/html'})
   res.end('This is Products')
 }
 else if(pathName==='/laptop' && id < laptopData.length){ //laptop is an array is basically 5 objects
-  res.end(`This is the Laptop page ${id}!`)
+//   res.end(`This is the Laptop page ${id}!`)
+ res.writeHead(200,{'Content-type':'text/html'})
+
+fs.readFile(`${__dirname}/templates/template-laptop.htm`,'utf-8',(err,data)=>{
+  // In a string that variable replace placeholder
+  const laptop=laptopData[id];
+  let output=data.replace(/{%PRODUCTNAME%}/g,laptop.productName); //replace string method
+   output=output.replace(/{%IMAGE%}/g,laptop.image);
+   output=output.replace(/{%PRICE%}/g,laptop.price) ; 
+   output=output.replace(/{%SCREEN%}/g,laptop.screen); 
+   output=output.replace(/{%CPU%}/g,laptop.cpu); 
+   output=output.replace(/{%STORAGE%}/g,laptop.storage) ;
+   output=output.replace(/{%RAM%}/g,laptop.ram) ;
+   output=output.replace(/{%DESCRIPTION%}/g,laptop.description); 
+   res.end(output)
+})
+
+
   res.writeHead(200,{
      'Content-type':'text/html',
     
@@ -74,7 +89,7 @@ res.writeHead(200,{
      'Content-type':'text/html',
     'my-own-header':'Hello world'
 })
- res.end("<h1>Request Server</h1>") //Some one page and see
+//  res.end("<h1>Request Server</h1>") //Some one page and see
 
 //respond to end of browser
 })
